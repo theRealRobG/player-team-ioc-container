@@ -1,11 +1,13 @@
 import { ErrorCodes } from './error-codes';
 import ContainerError from './error-type';
 
-export class CircularDependency extends Error implements ContainerError {
+export class CircularDependency implements ContainerError {
     public code = ErrorCodes.CIRCULAR_DEPENDENCY;
-    public explanation = 'TODO';
+    public explanation: string;
+    public message: string;
 
     constructor(dependencyChain: string[], id: string) {
-        super(`CIRCULAR DEPENDENCY: ${dependencyChain.join(' -> ')} -> ${id}`);
+        this.message = `CIRCULAR DEPENDENCY WHEN RESOLVING: ${id}`;
+        this.explanation = `${dependencyChain.join(' -> ')} -> ${id}`;
     }
 }

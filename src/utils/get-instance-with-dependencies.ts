@@ -10,10 +10,10 @@ export default function getInstance<T>(id: string, constructor: FunctionDeclarat
             try {
                 instance = (constructor as InstanceFunction<T>)(...dependencyInstances);
             } catch (err) {
-                throw new DependencyConstructionFailure(id);
+                throw new DependencyConstructionFailure(id, e.toString());
             }
         } else {
-            throw new DependencyConstructionFailure(id);
+            throw new DependencyConstructionFailure(id, e.toString());
         }
     }
     return instance;

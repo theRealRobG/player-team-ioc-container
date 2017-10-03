@@ -22,7 +22,7 @@ export class IoCContainer {
     private resolveWithDependencyChain<T>(id: string, dependencyChain: string[]): T {
         const registeredService = this.registeredServices[id] as RegisteredService<T>;
         if (!registeredService) {
-            throw new UnregisteredDependency(id);
+            throw new UnregisteredDependency(id, dependencyChain);
         }
         if (registeredService.instance) {
             return registeredService.instance;
