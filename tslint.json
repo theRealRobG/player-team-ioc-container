@@ -8,7 +8,9 @@
         "interface-name": false,
         "quotemark": [true, "single", "avoid-escape"],
         "ban-types": false,
-        "trailing-comma": false
+        "trailing-comma": false,
+        "no-unused-expression": true,
+        "no-unused-variable": true
     },
     "rulesDirectory": []
 }

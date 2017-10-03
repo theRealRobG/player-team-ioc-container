@@ -6,6 +6,6 @@ export class CircularDependency extends Error implements ContainerError {
     public explanation = 'TODO';
 
     constructor(dependencyChain: string[], id: string) {
-        super(`CIRCULAR DEPENDENCY: ${dependencyChain.join(' depends on ')} which depends on ${id}`);
+        super(`CIRCULAR DEPENDENCY: ${dependencyChain.join(' -> ')} -> ${id}`);
     }
 }

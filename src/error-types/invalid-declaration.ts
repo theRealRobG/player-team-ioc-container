@@ -5,7 +5,7 @@ export class InvalidDeclaration extends Error implements ContainerError {
     public code = ErrorCodes.INVALID_DECLARATION;
     public explanation = 'TODO';
 
-    constructor() {
-        super('INVALID DECLARATION');
+    constructor(id: string) {
+        super(`INVALID DECLARATION: ${id}`);
     }
 }
