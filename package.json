@@ -1,0 +1,18 @@
+{
+  "name": "player-team-ioc-container",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "npm run cleanup && npm run lint && tsc",
+    "lint": "tslint -c tslint.json 'src/**/*.ts'",
+    "cleanup": "rm -rf ./lib"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tslint": "^5.7.0",
+    "typescript": "^2.5.3"
+  }
+}

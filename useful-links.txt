@@ -1,0 +1,4 @@
+https://docs.angularjs.org/guide/di
+https://www.devbridge.com/articles/dependency-injection-in-javascript/
+http://krasimirtsonev.com/blog/article/Dependency-injection-in-JavaScript
+http://www.royjacobs.org/intravenous/
