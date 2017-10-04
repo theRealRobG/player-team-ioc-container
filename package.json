@@ -14,7 +14,9 @@
   },
   "author": "",
   "license": "ISC",
+  "pre-commit": "lint",
   "devDependencies": {
+    "pre-commit": "^1.2.2",
     "tslint": "^5.7.0"
   },
   "dependencies": {
