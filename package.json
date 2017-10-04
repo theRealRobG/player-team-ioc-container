@@ -5,15 +5,18 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "npm run compile",
-    "compile": "npm run cleanup && npm run lint && tsc",
+    "postinstall": "npm run build",
+    "compile": "npm run cleanup && npm run lint && npm run build",
+    "build": "tsc",
     "lint": "tslint -p . -c tslint.json 'src/**/*.ts'",
     "cleanup": "rm -rf ./lib"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "tslint": "^5.7.0",
+    "tslint": "^5.7.0"
+  },
+  "dependencies": {
     "typescript": "^2.5.3"
   }
 }
