@@ -1,7 +1,7 @@
 import { ErrorCodes } from './error-codes';
 import ContainerError from './error-type';
 
-export class DependencyConstructionFailure {
+export class DependencyConstructionFailure implements ContainerError {
     public code = ErrorCodes.DEPENDENCY_CONSTRUCTION_FAILURE;
     public explanation: string;
     public message: string;
