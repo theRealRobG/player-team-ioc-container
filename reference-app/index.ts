@@ -1,61 +1,36 @@
-// tslint:disable
-import { IoCContainer } from '../src/index';
+import simpleTest from './container-tests/simple-container';
+import singletonTest from './container-tests/singleton-test';
+import typeCheckTest from './container-tests/type-check-container';
 
-const AppContainerDiv = document.getElementById('app') as HTMLDivElement;
-if (AppContainerDiv) {
-    class A {
-        constructor(private ServiceB: B, private ServiceC: C) {
-            const anotherP = document.createElement('p');
-            anotherP.innerText = 'ServiceA has been initialised';
-            AppContainerDiv.appendChild(anotherP);
-        }
+const APP_ELEMENT_ID = 'app';
+const CLEAR_TEXT_ELEMENT_ID = 'clear-text';
+const SIMPLE_TEST_ELEMENT_ID = 'simple-test';
+const TYPE_CHECK_TEST_ELEMENT_ID = 'type-check-test';
+const SINGLETON_TEST_ELEMENT_ID = 'singleton-test';
 
-        public test(message: string) {
-            this.ServiceB.appendText(message);
-        }
+const appContainerDiv = document.getElementById(APP_ELEMENT_ID) as HTMLDivElement;
+(document.getElementById(CLEAR_TEXT_ELEMENT_ID) as HTMLDivElement).onclick = clearText;
+(document.getElementById(SIMPLE_TEST_ELEMENT_ID) as HTMLDivElement).onclick = runSimpleTest;
+(document.getElementById(TYPE_CHECK_TEST_ELEMENT_ID) as HTMLDivElement).onclick = runTypeCheckTest;
+(document.getElementById(SINGLETON_TEST_ELEMENT_ID) as HTMLDivElement).onclick = runSingletonTest;
 
-        public anotherTest(message: string) {
-            this.ServiceC.test(message);
-        }
-    }
+function clearText() {
+    appContainerDiv.innerHTML = '';
+}
 
-    class B {
-        appendText(message: string) {
-            const anotherP = document.createElement('p');
-            anotherP.innerText = message;
-            AppContainerDiv.appendChild(anotherP);
-        }
-    }
+function runTest(executeTest: (appDiv: HTMLDivElement) => void) {
+    clearText();
+    executeTest(appContainerDiv);
+}
 
-    class C {
-        constructor(private randomNameThatIsActuallyB: B, someD: D) {}
+function runSimpleTest() {
+    runTest(simpleTest);
+}
 
-        public test(message: string) {
-            this.randomNameThatIsActuallyB.appendText(message);
-        }
-    }
+function runTypeCheckTest() {
+    runTest(typeCheckTest);
+}
 
-    class D {
-        constructor(ServiceB: any) {}
-    }
-
-    const container = new IoCContainer();
-    container.register('ServiceA', A);
-    container.register('ServiceB', B);
-    container.register('ServiceC', ['ServiceB', 'ServiceD', C]);
-    container.register('ServiceD', D);
-    const serviceA = container.resolve<A>('ServiceA');
-
-    serviceA.test('Amazing experiences!');
-    serviceA.anotherTest('Seriously, Rob is so awesome');
-
-    const serviceC = container.resolve<C>('ServiceC');
-    serviceC.test('This is so cool!');
-
-    container.register('ServiceAnon', ['ServiceC', (minifiedC: C) => minifiedC.test('Anonymous jam')]);
-    container.resolve<void>('ServiceAnon');
-
-    container.register('Jam', () => ({ jam: 'Jam is sweet' }));
-    const jam = container.resolve<{ jam: string }>('Jam');
-    serviceA.anotherTest(jam.jam);
+function runSingletonTest() {
+    runTest(singletonTest);
 }

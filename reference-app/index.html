@@ -3,8 +3,22 @@
     <head>
         <meta charset="utf-8">
         <title>player-team-ioc-container reference app</title>
+        <style>
+            .button {
+                background: grey;
+                padding: 10px;
+                text-align: center;
+                cursor: pointer;
+                color: white;
+                margin: 5px;
+            }
+        </style>
     </head>
     <body>
+        <div id="clear-text" class="button">Clear Text</div>
+        <div id="simple-test" class="button">Run Simple Test</div>
+        <div id="type-check-test" class="button">Run Type Check Test</div>
+        <div id="singleton-test" class="button">Run Singleton Test</div>
         <div id="app"></div>
         <script type="text/javascript" src="dist/bundle.min.js"></script>
     </body>

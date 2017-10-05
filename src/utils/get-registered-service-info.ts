@@ -11,7 +11,8 @@ export default function getRegisteredServiceInfo(id: string, declaration: Declar
     if (typeof declaration === 'function') {
         return {
             constructor: declaration,
-            dependencies: getParamNames(declaration)
+            dependencies: getParamNames(declaration),
+            isSingleton: false
         };
     } else if (Array.isArray(declaration)) {
         const { constructor, dependencies } = {
@@ -34,7 +35,11 @@ export default function getRegisteredServiceInfo(id: string, declaration: Declar
             const message = `${midMessage}No. Dependencies: ${dependenciesLength}, No. Parameters: ${parametersLength}`;
             throw new InvalidDeclaration(id, message);
         }
-        return { constructor, dependencies };
+        return {
+            constructor,
+            dependencies,
+            isSingleton: false
+        };
     } else {
         throw new InvalidDeclaration(id, 'Declaration must be a function or an array');
     }
