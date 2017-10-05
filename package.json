@@ -6,9 +6,9 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "npm run build",
-    "compile": "npm run cleanup && npm run lint && npm run build",
-    "build": "tsc",
+    "postinstall": "npm run compile",
+    "build": "npm run cleanup && npm run lint && npm run compile",
+    "compile": "tsc",
     "lint": "tslint -p . -c tslint.json 'src/**/*.ts'",
     "cleanup": "rm -rf ./lib"
   },

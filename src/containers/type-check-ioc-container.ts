@@ -21,11 +21,14 @@ export class TypeCheckIoCContainer extends IoCContainer {
             throw new InvalidDeclaration(id, 'YOU MUST DECLARE AN INTERFACE FOR EACH SERVICE ' +
                 'BEFORE REGISTERING AN IMPLEMENTAION');
         }
-        const { constructor, dependencies } = getRegisteredServiceInfo(id, declaration);
+        const { constructor, dependencies, isSingleton } = getRegisteredServiceInfo(id, declaration);
         if (!((constructor as InstanceConstructor<any>).prototype instanceof interfaceToRegister)) {
             throw new InvalidDeclaration(id, 'INTERFACE MISMATCH - YOU MUST EXTEND THE DECLARED ' +
                 'INTERFACE IN YOUR IMPLEMENTATION');
         }
-        this.registeredServices[id] = { constructor, dependencies };
+        this.registeredServices[id] = { constructor, dependencies, isSingleton };
+        return {
+            asSingleton: () => this.registeredServices[id].isSingleton = true
+        };
     }
 }
