@@ -27,17 +27,18 @@ export default (appContainerDiv: HTMLDivElement) => {
         robot: IRobot,
         pod: IPod
     };
+    const container = new TypeCheckIoCContainer(config);
 
-    class Test extends ITest {
+    @container.provides<ITest>('test', ITest.prototype)
+    class Test {
         jam = 'jam';
         test() {
             log(this.jam);
         }
     }
-    class Robot extends IRobot {
-        constructor(private test: ITest) {
-            super();
-        }
+    @container.provides<IRobot>('robot', IRobot.prototype)
+    class Robot {
+        constructor(private test: ITest) {}
         speak(message: string) {
             log(message);
         }
@@ -48,25 +49,18 @@ export default (appContainerDiv: HTMLDivElement) => {
             return this.test.jam;
         }
     }
-    class Pod extends IPod {
-        constructor(private oneTest: ITest, private somethingElse: IRobot) {
-            super();
-        }
+    @container.provides<IPod>('pod', IPod.prototype)
+    class Pod {
+        constructor(private test: ITest, private robot: IRobot) {}
 
         youChoose(choice: boolean) {
-            choice ? this.oneTest.test() : this.somethingElse.speak(`you chose ${this.somethingElse.getJam()}`);
+            choice ? this.test.test() : this.robot.speak(`you chose ${this.robot.getJam()}`);
         }
     }
 
-    const container = new TypeCheckIoCContainer(config);
-
-    container.register('test', Test);
-    container.register('robot', Robot);
-    container.register('pod', ['test', 'robot', Pod]);
-
-    const test = container.resolve<ITest>('test');
-    const robot = container.resolve<IRobot>('robot');
-    const pod = container.resolve<IPod>('pod');
+    const test = container.get<ITest>('test');
+    const robot = container.get<IRobot>('robot');
+    const pod = container.get<IPod>('pod');
 
     test.test();
     robot.speak('amazing experiences');

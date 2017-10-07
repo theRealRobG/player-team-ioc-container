@@ -1,22 +1,9 @@
 import { CircularDependency, UnregisteredDependency } from '../error-types';
-import { Declaration, RegisteredService } from '../types';
-
+import { RegisteredService } from '../types';
 import getInstanceWithDependencies from '../utils/get-instance-with-dependencies';
-import getRegisteredServiceInfo from '../utils/get-registered-service-info';
 
-export class IoCContainer {
+export default class {
     protected registeredServices: { [id: string]: RegisteredService<any> } = {};
-
-    public resolve<T>(id: string): T {
-        return this.resolveWithDependencyChain<T>(id, []);
-    }
-
-    public register(id: string, declaration: Declaration<any>) {
-        this.registeredServices[id] = getRegisteredServiceInfo(id, declaration);
-        return {
-            asSingleton: () => this.registeredServices[id].isSingleton = true
-        };
-    }
 
     protected resolveWithDependencyChain<T>(id: string, dependencyChain: string[]): T {
         const registeredService = this.registeredServices[id] as RegisteredService<T>;

@@ -8,10 +8,10 @@ export class UnregisteredDependency implements ContainerError {
 
     constructor(unregisteredId: string, dependencyChain: string[]) {
         const originalId = dependencyChain[0] || unregisteredId;
-        this.message = `UNREGISTERED DEPENDENCY: ${unregisteredId} WHEN TRYING TO RESOLVE: ${originalId}`;
+        this.message = `UNREGISTERED DEPENDENCY: "${unregisteredId}" WHEN TRYING TO RESOLVE: "${originalId}"`;
         const baseExplanation = 'You must register a dependency before it can be used.';
         if (dependencyChain.length === 0) {
-            this.explanation = `${baseExplanation} You have tried to resolve ${originalId} but have not registered it.`;
+            this.explanation = `${baseExplanation} You tried to resolve "${originalId}" but have not registered it.`;
         } else {
             this.explanation = `${baseExplanation} ${dependencyChain.join(' -> ')} -> ${unregisteredId} not registered`;
         }

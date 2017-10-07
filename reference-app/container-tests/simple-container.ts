@@ -1,5 +1,5 @@
 // tslint:disable
-import { IoCContainer } from '../../src'
+import { SimpleIoCContainer } from '../../src'
 
 export default (appContainerDiv: HTMLDivElement) => {
     class A {
@@ -38,7 +38,7 @@ export default (appContainerDiv: HTMLDivElement) => {
         constructor(ServiceB: any) {}
     }
 
-    const container = new IoCContainer();
+    const container = new SimpleIoCContainer();
     container.register('ServiceA', A);
     container.register('ServiceB', B);
     container.register('ServiceC', ['ServiceB', 'ServiceD', C]);
@@ -50,11 +50,4 @@ export default (appContainerDiv: HTMLDivElement) => {
 
     const serviceC = container.resolve<C>('ServiceC');
     serviceC.test('This is so cool!');
-
-    container.register('ServiceAnon', ['ServiceC', (minifiedC: C) => minifiedC.test('Anonymous jam')]);
-    container.resolve<void>('ServiceAnon');
-
-    container.register('Jam', () => ({ jam: 'Jam is sweet' }));
-    const jam = container.resolve<{ jam: string }>('Jam');
-    serviceA.anotherTest(jam.jam);
 }

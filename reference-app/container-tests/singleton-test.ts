@@ -1,5 +1,5 @@
 // tslint:disable
-import { IoCContainer } from '../../src';
+import { SimpleIoCContainer } from '../../src';
 
 export default (appContainerDiv: HTMLDivElement) => {
     function log(...messages: any[]) {
@@ -35,7 +35,7 @@ export default (appContainerDiv: HTMLDivElement) => {
         }
     }
 
-    const container = new IoCContainer();
+    const container = new SimpleIoCContainer();
     container.register('bob', SingletonTest);
     container.register('singleBob', SingletonTest).asSingleton();
     container.register('jim', Dependee);

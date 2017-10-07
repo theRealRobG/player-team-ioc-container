@@ -1,7 +1,7 @@
 import { InvalidDeclaration } from '../error-types';
 import {
     Declaration,
-    FunctionDeclaration,
+    InstanceConstructor,
     RegisteredService
 } from '../types';
 
@@ -16,7 +16,7 @@ export default function getRegisteredServiceInfo(id: string, declaration: Declar
         };
     } else if (Array.isArray(declaration)) {
         const { constructor, dependencies } = {
-            constructor: declaration.slice(-1)[0] as FunctionDeclaration<any>,
+            constructor: declaration.slice(-1)[0] as InstanceConstructor<any>,
             dependencies: declaration.slice(0, -1) as string[]
         };
         const errorMessageStart = 'When registering using array declaration, ';
