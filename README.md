@@ -35,6 +35,10 @@ npm run compile
 
 ## Using the library
 ### SimpleIoCContainer
+- [`reslove`](https://github.com/theRealRobG/player-team-ioc-container#resolve)
+- [`register`](https://github.com/theRealRobG/player-team-ioc-container#register)
+- [Example usage](https://github.com/theRealRobG/player-team-ioc-container#example-usage)
+
 The interface for the `SimpleIoCContainer` is as follows:
 ```ts
 interface ISimpleIoCContainer {
@@ -155,6 +159,12 @@ a.speak();
 ```
 
 ### TypeCheckIoCContainer
+- [`new TypeCheckIoCContainer(config: RegisteredInterfaces)`](https://github.com/theRealRobG/player-team-ioc-container#new-typecheckioccontainerconfig-registeredinterfaces)
+- [`get`](https://github.com/theRealRobG/player-team-ioc-container#get)
+- [`provides`](https://github.com/theRealRobG/player-team-ioc-container#provides)
+- [`singleton`](https://github.com/theRealRobG/player-team-ioc-container#singleton)
+- [Example usage](https://github.com/theRealRobG/player-team-ioc-container#example-usage)
+
 The interface for the `TypeCheckIoCContainer` is as follows:
 ```ts
 interface ITypeCheckIoCContainer {
