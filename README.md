@@ -34,6 +34,9 @@ npm run compile
 ```
 
 ## Using the library
+- [`SimpleIoCContainer`](https://github.com/theRealRobG/player-team-ioc-container#simpleioccontainer)
+- [`TypeCheckIoCContainer`](https://github.com/theRealRobG/player-team-ioc-container#typecheckioccontainer)
+
 ### SimpleIoCContainer
 - [`reslove`](https://github.com/theRealRobG/player-team-ioc-container#resolve)
 - [`register`](https://github.com/theRealRobG/player-team-ioc-container#register)
