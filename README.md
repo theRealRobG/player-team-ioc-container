@@ -166,7 +166,7 @@ a.speak();
 - [`get`](https://github.com/theRealRobG/player-team-ioc-container#get)
 - [`provides`](https://github.com/theRealRobG/player-team-ioc-container#provides)
 - [`singleton`](https://github.com/theRealRobG/player-team-ioc-container#singleton)
-- [Example usage](https://github.com/theRealRobG/player-team-ioc-container#example-usage)
+- [Example usage](https://github.com/theRealRobG/player-team-ioc-container#example-usage-1)
 
 The interface for the `TypeCheckIoCContainer` is as follows:
 ```ts
