@@ -1,3 +1,4 @@
+import reflectTest from './container-tests/reflect-metadata-test';
 import simpleTest from './container-tests/simple-container';
 import singletonTest from './container-tests/singleton-test';
 import typeCheckTest from './container-tests/type-check-container';
@@ -7,12 +8,14 @@ const CLEAR_TEXT_ELEMENT_ID = 'clear-text';
 const SIMPLE_TEST_ELEMENT_ID = 'simple-test';
 const TYPE_CHECK_TEST_ELEMENT_ID = 'type-check-test';
 const SINGLETON_TEST_ELEMENT_ID = 'singleton-test';
+const REFLECT_TEST_ELEMENT_ID = 'reflect-test';
 
 const appContainerDiv = document.getElementById(APP_ELEMENT_ID) as HTMLDivElement;
 (document.getElementById(CLEAR_TEXT_ELEMENT_ID) as HTMLDivElement).onclick = clearText;
 (document.getElementById(SIMPLE_TEST_ELEMENT_ID) as HTMLDivElement).onclick = runSimpleTest;
 (document.getElementById(TYPE_CHECK_TEST_ELEMENT_ID) as HTMLDivElement).onclick = runTypeCheckTest;
 (document.getElementById(SINGLETON_TEST_ELEMENT_ID) as HTMLDivElement).onclick = runSingletonTest;
+(document.getElementById(REFLECT_TEST_ELEMENT_ID) as HTMLDivElement).onclick = runReflectTest;
 
 function clearText() {
     appContainerDiv.innerHTML = '';
@@ -33,4 +36,8 @@ function runTypeCheckTest() {
 
 function runSingletonTest() {
     runTest(singletonTest);
+}
+
+function runReflectTest() {
+    runTest(reflectTest);
 }

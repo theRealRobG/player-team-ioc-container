@@ -5,13 +5,15 @@ import {
     RegisteredService
 } from '../types';
 
-import getParamNames from './get-param-names';
-
-export default function getRegisteredServiceInfo(id: string, declaration: Declaration<any>): RegisteredService<any> {
+export default function getRegisteredServiceInfo<T>(
+    id: string,
+    declaration: Declaration<T>,
+    getParamsMethod: (constructor: InstanceConstructor<T>) => string[]
+): RegisteredService<T> {
     if (typeof declaration === 'function') {
         return {
             constructor: declaration,
-            dependencies: getParamNames(declaration),
+            dependencies: getParamsMethod(declaration),
             isSingleton: false
         };
     } else if (Array.isArray(declaration)) {
@@ -29,7 +31,7 @@ export default function getRegisteredServiceInfo(id: string, declaration: Declar
             throw new InvalidDeclaration(id, message);
         }
         const dependenciesLength = dependencies.length;
-        const parametersLength = getParamNames(constructor).length;
+        const parametersLength = getParamsMethod(constructor).length;
         if (dependenciesLength !== parametersLength) {
             const midMessage = `${errorMessageStart}the declared dependencies must equal the expected parameters: `;
             const message = `${midMessage}No. Dependencies: ${dependenciesLength}, No. Parameters: ${parametersLength}`;

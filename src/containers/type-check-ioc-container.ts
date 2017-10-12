@@ -1,4 +1,5 @@
 import { InvalidConfig, InvalidDeclaration, MissingConfig } from '../error-types';
+import getParamNames from '../utils/get-param-names';
 import getRegisteredServiceInfo from '../utils/get-registered-service-info';
 import isConstructable from '../utils/is-constructable';
 import BaseContainer from './base-container';
@@ -39,7 +40,7 @@ export default class extends BaseContainer {
         const registeredInterface = this.registeredInterfaces[id];
         this.validateRegistration(id, registeredInterface, interfacePrototypeForImpl);
         return (implementation: Constructor<T>) => {
-            const { constructor, dependencies } = getRegisteredServiceInfo(id, implementation);
+            const { constructor, dependencies } = getRegisteredServiceInfo(id, implementation, getParamNames);
             if (!isConstructable(constructor)) {
                 const message = 'The registered function must be constructable (can be called with new)';
                 throw new InvalidDeclaration(id, message);
